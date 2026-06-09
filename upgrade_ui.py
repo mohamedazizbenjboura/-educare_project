@@ -17,6 +17,7 @@ templates = {
         .btn { border-radius: 8px; font-weight: 500; }
         .badge { border-radius: 6px; padding: 0.5em 0.8em; }
         .progress { border-radius: 10px; background-color: #e9ecef; }
+        .card-hover-effect:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1)!important; }
     </style>
 </head>
 <body>
@@ -210,7 +211,7 @@ templates = {
     </div>
 </div>
 
-<div class="card shadow-sm border-0">
+<div class="card shadow-sm border-0 mb-5">
     <div class="card-body p-0">
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
@@ -272,6 +273,47 @@ templates = {
         </table>
     </div>
 </div>
+
+<!-- F6: Advanced AI Decision Support Resources (Interactive Visual Evidence) -->
+{% if scraped_resources %}
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm bg-primary bg-opacity-10">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary text-white rounded p-2 me-3"><i class="bi bi-robot fs-4"></i></div>
+                    <div>
+                        <h5 class="fw-bold mb-0 text-primary">AI Decision Support: Ingested Knowledge</h5>
+                        <small class="text-muted">Interactive evidence retrieved via MCP & A2A Protocols.</small>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    {% for resource in scraped_resources %}
+                    <div class="col-md-4">
+                        <a href="{{ resource.source_url }}" target="_blank" class="text-decoration-none">
+                            <div class="card h-100 border-0 shadow-sm card-hover-effect">
+                                <div class="card-body p-3">
+                                    <h6 class="fw-bold text-dark small mb-2"><i class="bi bi-journal-text text-primary me-1"></i>{{ resource.title }}</h6>
+                                    <p class="text-muted small mb-0" style="font-size: 0.75rem;">{{ resource.abstract|truncatechars:100 }}</p>
+                                    <hr class="my-2">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-light text-primary border" style="font-size: 0.65rem;">{{ resource.extraction_method }}</span>
+                                        <small class="text-muted" style="font-size: 0.6rem;">{{ resource.access_date|slice:":10" }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mt-3 text-center">
+                    <small class="text-muted fst-italic"><i class="bi bi-info-circle me-1"></i>Tip: Click any resource card to view the original source documentation.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}''',
 
     'school_app/templates/school_app/case_detail.html': '''{% extends 'school_app/base.html' %}

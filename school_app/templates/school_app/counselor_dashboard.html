@@ -87,7 +87,7 @@
                     {% for resource in scraped_resources %}
                     <div class="col-md-4">
                         <a href="{{ resource.source_url }}" target="_blank" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm card-hover-effect" style="transition: transform 0.2s;">
+                            <div class="card h-100 border-0 shadow-sm card-hover-effect">
                                 <div class="card-body p-3">
                                     <h6 class="fw-bold text-dark small mb-2"><i class="bi bi-journal-text text-primary me-1"></i>{{ resource.title }}</h6>
                                     <p class="text-muted small mb-0" style="font-size: 0.75rem;">{{ resource.abstract|truncatechars:100 }}</p>
@@ -109,9 +109,5 @@
         </div>
     </div>
 </div>
-
-<style>
-    .card-hover-effect:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1)!important; }
-</style>
 {% endif %}
 {% endblock %}
