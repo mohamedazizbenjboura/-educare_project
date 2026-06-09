@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Tunisie : Participation des adolescents",
+        "abstract": "Le portail officiel de l'UNICEF Tunisie sur les défis de la participation des jeunes, les solutions proposées et l'engagement des adolescents dans le système éducatif.",
+        "source_url": "https://www.unicef.org/tunisia/participation-des-adolescents",
+        "access_date": "2026-06-09T10:00:00.000000",
+        "extraction_method": "UNICEF Tunisie Portal"
+    },
+    {
+        "title": "Santé mentale des adolescents : Fiche OMS",
+        "abstract": "Données mondiales et stratégies d'intervention pour la santé mentale des adolescents. Souligne l'importance de la détection précoce en milieu scolaire.",
+        "source_url": "https://www.who.int/fr/news-room/fact-sheets/detail/adolescent-mental-health",
+        "access_date": "2026-06-09T10:15:00.000000",
+        "extraction_method": "OMS Knowledge Base"
+    },
+    {
+        "title": "Supporting Children and Young People's Mental Health",
+        "abstract": "Practical strategies for educators to support student wellbeing. This resource helps in creating effective intervention plans within the EduCare platform.",
+        "source_url": "https://www.mentalhealth.org.uk/explore-mental-health/a-z-topics/children-and-young-people",
+        "access_date": "2026-06-09T10:30:00.000000",
+        "extraction_method": "Mental Health UK Scraper"
+    }
+]

@@ -1,0 +1,62 @@
+{% extends 'school_app/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <nav aria-label="breadcrumb" class="mb-3">
+          <ol class="breadcrumb bg-white p-2 rounded-3 shadow-sm border">
+            <li class="breadcrumb-item"><a href="{% url 'teacher_dashboard' %}" class="text-decoration-none fw-bold"><i class="bi bi-house-door-fill me-1"></i>Dashboard</a></li>
+            <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">{{ student.first_name }} {{ student.last_name }}</li>
+          </ol>
+        </nav>
+        
+        <div class="card shadow-sm border-0 overflow-hidden">
+            <div class="card-header bg-white border-bottom py-3 d-flex align-items-center">
+                <div class="bg-primary text-white rounded p-2 me-3"><i class="bi bi-journal-text fs-4"></i></div>
+                <div>
+                    <h4 class="mb-0 fw-bold">Log Daily Record</h4>
+                    <span class="text-muted small">Enter attendance and observe behavior</span>
+                </div>
+            </div>
+            <div class="card-body p-4 bg-light">
+                <div class="alert alert-info border border-info shadow-sm d-flex align-items-center mb-4">
+                    <i class="bi bi-info-circle-fill fs-4 text-info me-3"></i>
+                    <div>
+                        <strong class="d-block">System Intelligence Rule:</strong>
+                        <small>Logging a behavioral flag automatically dispatches a prioritized alert to the school counselor.</small>
+                    </div>
+                </div>
+
+                <form method="post" class="bg-white p-4 rounded-3 shadow-sm border">
+                    {% csrf_token %}
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-secondary text-uppercase small"><i class="bi bi-calendar-event me-1"></i>Observation Date</label>
+                            {{ form.date }}
+                            {% if form.date.errors %}<small class="text-danger fw-bold"><i class="bi bi-exclamation-triangle"></i> {{ form.date.errors.0 }}</small>{% endif %}
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <div class="form-check form-switch fs-5 pb-1">
+                                {{ form.is_absent }}
+                                <label class="form-check-label fw-bold text-dark ms-2" for="{{ form.is_absent.id_for_label }}">Mark Student as Absent</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="text-muted">
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-danger text-uppercase small"><i class="bi bi-flag-fill me-1"></i>Behavioral Flag (Optional)</label>
+                        {{ form.behavioral_flag }}
+                        <div class="form-text mt-2"><i class="bi bi-lightbulb me-1"></i>Use this to document objective facts, e.g. "Slept in class", "Refused to speak". <strong>Do not diagnose.</strong></div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-5">
+                        <a href="{% url 'teacher_dashboard' %}" class="btn btn-light border text-muted fw-bold px-4"><i class="bi bi-x-circle me-1"></i>Cancel</a>
+                        <button type="submit" class="btn btn-success px-5 fw-bold shadow-sm"><i class="bi bi-check-circle-fill me-1"></i>Submit Record</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

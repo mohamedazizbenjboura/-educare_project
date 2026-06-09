@@ -1,0 +1,49 @@
+{% extends 'school_app/base.html' %}
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col-md-8">
+        <h2 class="fw-bold mb-1"><i class="bi bi-journal-bookmark-fill text-primary me-2"></i>Teacher Dashboard</h2>
+        <p class="text-muted mb-0">Monitor classroom attendance and submit behavioral flags.</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <div class="badge bg-primary fs-6 shadow-sm"><i class="bi bi-people-fill me-2"></i>{{ students.count }} Students Assigned</div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-4 py-3">Student Name</th>
+                    <th class="py-3">Grade Level</th>
+                    <th class="text-end pe-4 py-3">Quick Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td class="ps-4 py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px; font-weight: bold;">
+                                {{ student.first_name|first }}{{ student.last_name|first }}
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark">{{ student.first_name }} {{ student.last_name }}</h6>
+                                <small class="text-muted">ID: #STU-{{ student.id|stringformat:"04d" }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-light text-dark border border-secondary"><i class="bi bi-diagram-3-fill me-1"></i>{{ student.grade_level }}</span></td>
+                    <td class="text-end pe-4">
+                        <a href="{% url 'log_attendance' student.id %}" class="btn btn-sm btn-outline-primary shadow-sm px-3">
+                            <i class="bi bi-clipboard-check me-1"></i> Log Activity
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

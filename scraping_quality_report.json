@@ -1,0 +1,9 @@
+{
+    "source": "https://jsonplaceholder.typicode.com/posts?_limit=5",
+    "total_items_found": 5,
+    "valid_rows_extracted": 5,
+    "failed_rows": 0,
+    "dedup_ratio": "1.0 (Unique items)",
+    "retry_count": 0,
+    "timestamp": "2026-06-09T19:59:51.046948"
+}

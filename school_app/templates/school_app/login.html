@@ -1,0 +1,42 @@
+{% extends 'school_app/base.html' %}
+{% block content %}
+<div class="row pt-5 justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+            <div class="card-header bg-white text-center py-4 border-bottom-0">
+                <div class="display-1 text-primary mb-2"><i class="bi bi-shield-lock-fill"></i></div>
+                <h3 class="fw-bold text-dark">Welcome to EduCare</h3>
+                <p class="text-muted mb-0">Secure portal for youth outcomes monitoring</p>
+            </div>
+            <div class="card-body px-5 pb-5">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-bold small text-uppercase">Username</label>
+                        <div class="input-group input-group-lg shadow-sm rounded-3">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-secondary"></i></span>
+                            <input type="text" name="username" class="form-control border-start-0 bg-light" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-secondary fw-bold small text-uppercase">Password</label>
+                        <div class="input-group input-group-lg shadow-sm rounded-3">
+                            <span class="input-group-text bg-light border-end-0"><i class="bi bi-key text-secondary"></i></span>
+                            <input type="password" name="password" class="form-control border-start-0 bg-light" required>
+                        </div>
+                        {% if form.errors %}
+                        <small class="text-danger mt-2 d-block fw-bold"><i class="bi bi-exclamation-triangle-fill me-1"></i>Invalid username or password.</small>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow-sm">Secure Login <i class="bi bi-arrow-right-circle ms-1"></i></button>
+                </form>
+                <div class="mt-4 p-3 bg-light rounded-3 text-center border">
+                    <span class="text-muted small fw-bold text-uppercase d-block mb-2">Demo Credentials</span>
+                    <span class="d-block small text-secondary"><i class="bi bi-person me-1"></i>teacher1 | counselor1 | admin1</span>
+                    <span class="d-block small text-secondary"><i class="bi bi-key me-1"></i>password123</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

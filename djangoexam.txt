@@ -1,0 +1,48 @@
+Dear students,
+
+I hope you are doing well.
+
+Please find attached the Exam Project Statement for Python Web Programming (Django). This document explains the theme, required deliverables, submission rules, and the validation process.
+
+Project theme (required)
+“Tunisian Hope and Future for Children and Youth”
+Your mission is to design and implement a Django-based platform that addresses a meaningful Tunisian social challenge related to children/youth behavior and outcomes (education, health/preventive care, mental health/psychosocial support, digital behavior, community and family support pathways).
+
+Minimum scope (non‑negotiable)
+Your project must include, at minimum:
+
+One complete Django platform with role-based workflows (at least 3 roles)
+At least 2 operational scenarios implemented end-to-end
+At least 1 controlled failure case per scenario (e.g., validation failure, unauthorized action, malformed dataset, timeout, bad schema) with safe recovery
+A clear web dashboard / UI for operational monitoring and decision support
+Automated tests (unit + integration) and reproducible evidence of your work
+Data & ethics (mandatory)
+
+Use synthetic or openly licensed data only
+Do not use real personal, medical, or confidential data
+Document your anonymization/assumptions, access-control policy, and limitations
+Submission (Moodle — mandatory)
+
+Submit the complete package on Moodle by the last Saturday of the semester (end of day, as set on Moodle)
+No extension and no late acceptance will be granted
+No submission = 0
+Your submission package must include:
+
+Slides (PDF/PPT): problem, architecture, demo flow, limits, next steps
+Source code (repository link or ZIP)
+README (install/run/test steps, sample accounts, dataset notes)
+Datasets/fixtures/snapshots (if applicable), clearly listed in the README
+Evidence: screenshots and/or a short demo video
+A short section on ethics, data governance, and limitations
+Validation session (oral defense + demo + Q&A)
+Project validation will take place during the main exam session. The date, time, and room assignments will be communicated by SESAME administration through official channels.
+
+Important rule: If you are absent on the validation day, your maximum grade for this exam project will be capped at 08/20. Presence is required to be eligible for the full 20/20 scale.
+
+Individual work (mandatory)
+This is a strictly individual project. Academic integrity rules apply: if you reuse external code or tutorials, you must cite them, and you should be able to explain every part of your submission.
+
+Best regards,
+Chaouki Bayoudhi
+Instructor — Python Web Programming (Django)
+SESAME University
