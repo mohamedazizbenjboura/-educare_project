@@ -3,11 +3,12 @@ import django
 import random
 from faker import Faker
 from datetime import timedelta
+from django.utils import timezone
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'educare_project.settings')
 django.setup()
 
-from school_app.models import User, Student, AttendanceRecord, InterventionCase
+from school_app.models import User, Student, AttendanceRecord, InterventionCase, SystemConfiguration
 
 fake = Faker()
 
@@ -23,9 +24,10 @@ def seed_data():
     counselor = User.objects.create_user(username='counselor1', password='password123', role='COUNSELOR', first_name='Jane', last_name='Smith')
     principal = User.objects.create_user(username='admin1', password='password123', role='PRINCIPAL', first_name='Boss', last_name='Man')
 
-    print("Creating students...")
+    print("Creating students for teacher1...")
     students = []
-    for _ in range(15):
+    # Create 10 students all assigned to teacher1 to ensure consistent demo
+    for _ in range(10):
         student = Student.objects.create(
             first_name=fake.first_name(),
             last_name=fake.last_name(),
@@ -35,36 +37,66 @@ def seed_data():
         )
         students.append(student)
 
-    print("Creating attendance records and interventions...")
-    for student in students:
-        # Simulate some random attendance records
+    print("Generating consistent scenario data...")
+    today = timezone.now().date()
+    
+    # Ensure at least ONE student has 3 consecutive absences (Threshold Alert)
+    absentee_student = students[0]
+    for i in range(3):
+        AttendanceRecord.objects.create(
+            student=absentee_student,
+            date=today - timedelta(days=i+1),
+            is_absent=True,
+            logged_by=teacher
+        )
+    # Manually trigger the alert that views.py would usually handle
+    InterventionCase.objects.create(
+        student=absentee_student,
+        status='NEW',
+        risk_score=85,
+        plan_description="Automated alert: 3 consecutive absences detected."
+    )
+
+    # Ensure at least ONE student has a behavioral flag (Scenario 1 Alert)
+    flagged_student = students[1]
+    AttendanceRecord.objects.create(
+        student=flagged_student,
+        date=today - timedelta(days=1),
+        is_absent=False,
+        behavioral_flag="Appears extremely lethargic and disengaged in class.",
+        logged_by=teacher
+    )
+    InterventionCase.objects.create(
+        student=flagged_student,
+        status='NEW',
+        risk_score=75,
+        plan_description=f"Automated alert: Behavioral flag logged by teacher1: Appears extremely lethargic and disengaged in class."
+    )
+
+    # Ensure at least ONE student has an ongoing intervention (Scenario 2 Follow-up)
+    intervention_student = students[2]
+    case = InterventionCase.objects.create(
+        student=intervention_student,
+        counselor=counselor,
+        status='INTERVENTION',
+        risk_score=60,
+        plan_description="Scheduled weekly check-ins with family.",
+        follow_up_date=today + timedelta(days=7)
+    )
+
+    # Create random historical data for the rest
+    for student in students[3:]:
         for i in range(5):
-            date = fake.date_between(start_date='-30d', end_date='today')
-            # 20% chance of absence
-            is_absent = random.random() < 0.2
-            
-            # Avoid IntegrityError by using get_or_create for unique_together
-            record, created = AttendanceRecord.objects.get_or_create(
+            AttendanceRecord.objects.get_or_create(
                 student=student,
-                date=date,
+                date=today - timedelta(days=i+1),
                 defaults={
-                    'is_absent': is_absent,
-                    'logged_by': teacher,
-                    'behavioral_flag': 'seems withdrawn' if random.random() < 0.1 else ''
+                    'is_absent': random.random() < 0.1,
+                    'logged_by': teacher
                 }
             )
 
-        # Generate a fake intervention for some students
-        if random.random() < 0.3:
-            InterventionCase.objects.create(
-                student=student,
-                counselor=counselor,
-                status=random.choice(['NEW', 'IN_REVIEW', 'INTERVENTION']),
-                risk_score=random.randint(50, 95),
-                plan_description="Needs regular check-ins.",
-            )
-
-    print("Database seeded successfully!")
+    print("Database seeded with consistent cross-role data!")
 
 if __name__ == '__main__':
     seed_data()
